@@ -1,0 +1,175 @@
+[
+  {
+    "title": "Klassisk köttfärssås",
+    "description": "Snabb vardagsfavorit",
+    "ratings": [5,4,4],
+    "imageUrl": "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
+    "timeInMins": 30,
+    "price": 90,
+    "categories": ["Huvudrätt","Pasta"],
+    "instructions": ["Fräs lök","Bryn färs","Tillsätt tomat och sjud 20 min"],
+    "ingredients": [
+      { "name": "Nötfärs", "amount": 400, "unit": "gram" },
+      { "name": "Gul lök", "amount": 1, "unit": "st" },
+      { "name": "Krossade tomater", "amount": 400, "unit": "gram" }
+    ]
+  },
+
+  {
+    "title": "Krämig svampsoppa",
+    "description": "Len soppa på champinjoner och grädde.",
+    "ratings": [5,5,4],
+    "imageUrl": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    "timeInMins": 25,
+    "price": 70,
+    "categories": ["Förrätt","Soppa","Vegetariskt"],
+    "instructions": [
+      "Fräs lök och svamp i smör",
+      "Tillsätt buljong och grädde",
+      "Sjud 10 minuter",
+      "Mixa slätt och smaka av",
+      "Toppa med persilja"
+    ],
+    "ingredients": [
+      { "name": "Champinjoner", "amount": 300, "unit": "gram" },
+      { "name": "Gul lök", "amount": 1, "unit": "st" },
+      { "name": "Smör", "amount": 25, "unit": "gram" },
+      { "name": "Grädde", "amount": 2, "unit": "dl" },
+      { "name": "Grönsaksbuljong", "amount": 5, "unit": "dl" },
+      { "name": "Salt", "amount": 1, "unit": "tsk" },
+      { "name": "Svartpeppar", "amount": 1, "unit": "tsk" },
+      { "name": "Persilja", "amount": 1, "unit": "msk" }
+    ]
+  },
+  {
+    "title": "Caesarsallad med kyckling",
+    "description": "Klassiker med krutonger och parmesan.",
+    "ratings": [4,4,5,5],
+    "imageUrl": "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg",
+    "timeInMins": 20,
+    "price": 110,
+    "categories": ["Sallad","Huvudrätt","Kyckling"],
+    "instructions": [
+      "Bryn kycklingen tills genomstekt",
+      "Rosta bröd till krutonger",
+      "Blanda romansallad med dressing",
+      "Toppa med kyckling, krutonger och parmesan"
+    ],
+    "ingredients": [
+      { "name": "Kycklingfilé", "amount": 300, "unit": "gram" },
+      { "name": "Romansallad", "amount": 1, "unit": "st" },
+      { "name": "Bröd", "amount": 2, "unit": "skivor" },
+      { "name": "Parmesan", "amount": 50, "unit": "gram" },
+      { "name": "Caesardressing", "amount": 1, "unit": "dl" },
+      { "name": "Olivolja", "amount": 1, "unit": "msk" },
+      { "name": "Salt", "amount": 1, "unit": "tsk" },
+      { "name": "Svartpeppar", "amount": 1, "unit": "tsk" }
+    ]
+  },
+  {
+    "title": "Vegetarisk lasagne",
+    "description": "Fylld med grönsaker och krämig ostsås.",
+    "ratings": [],
+    "imageUrl": "https://images.pexels.com/photos/1435895/pexels-photo-1435895.jpeg",
+    "timeInMins": 45,
+    "price": 140,
+    "categories": ["Huvudrätt","Pasta","Vegetariskt"],
+    "instructions": [
+      "Fräs lök och grönsaker",
+      "Tillsätt krossade tomater och sjud",
+      "Koka en enkel ostsås",
+      "Varva sås och lasagneplattor i form",
+      "Grädda 25–30 minuter"
+    ],
+    "ingredients": [
+      { "name": "Lasagneplattor", "amount": 12, "unit": "st" },
+      { "name": "Zucchini", "amount": 1, "unit": "st" },
+      { "name": "Röd paprika", "amount": 1, "unit": "st" },
+      { "name": "Krossade tomater", "amount": 400, "unit": "gram" },
+      { "name": "Gul lök", "amount": 1, "unit": "st" },
+      { "name": "Riven ost", "amount": 150, "unit": "gram" },
+      { "name": "Mjölk", "amount": 5, "unit": "dl" },
+      { "name": "Smör", "amount": 50, "unit": "gram" },
+      { "name": "Vetemjöl", "amount": 3, "unit": "msk" },
+      { "name": "Salt", "amount": 1, "unit": "tsk" },
+      { "name": "Svartpeppar", "amount": 1, "unit": "tsk" }
+    ]
+  },
+  {
+    "title": "Lax i ugn med citron",
+    "description": "Saftig ugnsbakad lax med dill och citron.",
+    "ratings": [5,4,5],
+    "imageUrl": "https://images.pexels.com/photos/3296273/pexels-photo-3296273.jpeg",
+    "timeInMins": 25,
+    "price": 180,
+    "categories": ["Fisk","Huvudrätt","Glutenfritt"],
+    "instructions": [
+      "Sätt ugnen på 200°C",
+      "Lägg lax i ugnsform och ringla olja",
+      "Krydda med salt, peppar och citron",
+      "Baka 15–18 minuter",
+      "Toppa med dill och servera"
+    ],
+    "ingredients": [
+      { "name": "Laxfilé", "amount": 600, "unit": "gram" },
+      { "name": "Citron", "amount": 1, "unit": "st" },
+      { "name": "Olivolja", "amount": 2, "unit": "msk" },
+      { "name": "Salt", "amount": 1, "unit": "tsk" },
+      { "name": "Svartpeppar", "amount": 1, "unit": "tsk" },
+      { "name": "Potatis", "amount": 800, "unit": "gram" },
+      { "name": "Dill", "amount": 1, "unit": "msk" }
+    ]
+  },
+  {
+    "title": "Pannkakor med sylt",
+    "description": "Tun­na pannkakor – perfekt till efterrätt eller brunch.",
+    "ratings": [5,5,4,4],
+    "imageUrl": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+    "timeInMins": 30,
+    "price": 60,
+    "categories": ["Efterrätt","Fika","Barnvänligt"],
+    "instructions": [
+      "Vispa ägg, mjölk, mjöl och salt",
+      "Smält smör och rör ned i smeten",
+      "Stek tunna pannkakor i het panna",
+      "Servera med sylt"
+    ],
+    "ingredients": [
+      { "name": "Ägg", "amount": 3, "unit": "st" },
+      { "name": "Mjölk", "amount": 6, "unit": "dl" },
+      { "name": "Vetemjöl", "amount": 3, "unit": "dl" },
+      { "name": "Smör", "amount": 50, "unit": "gram" },
+      { "name": "Salt", "amount": 1, "unit": "krm" },
+      { "name": "Sylt", "amount": 2, "unit": "dl" }
+    ]
+  },
+  {
+    "title": "Chili sin carne (vegan)",
+    "description": "Mustig bönchili utan kött.",
+    "ratings": [4,4,5],
+    "imageUrl": "https://img.koket.se/standard-mega/vegansk-chili-sin-carne.png.webp",
+    "timeInMins": 40,
+    "price": 85,
+    "categories": ["Huvudrätt","Vegan","Långkok"],
+    "instructions": [
+      "Fräs lök och vitlök i olja",
+      "Tillsätt paprika och kryddor",
+      "Häll i tomater och bönor",
+      "Sjud 20–25 minuter",
+      "Smaka av med salt och chili"
+    ],
+    "ingredients": [
+      { "name": "Kidneybönor", "amount": 400, "unit": "gram" },
+      { "name": "Svarta bönor", "amount": 400, "unit": "gram" },
+      { "name": "Krossade tomater", "amount": 400, "unit": "gram" },
+      { "name": "Majs", "amount": 200, "unit": "gram" },
+      { "name": "Gul lök", "amount": 1, "unit": "st" },
+      { "name": "Vitlök", "amount": 2, "unit": "klyftor" },
+      { "name": "Röd paprika", "amount": 1, "unit": "st" },
+      { "name": "Spiskummin", "amount": 2, "unit": "tsk" },
+      { "name": "Chilipulver", "amount": 1, "unit": "tsk" },
+      { "name": "Salt", "amount": 1, "unit": "tsk" },
+      { "name": "Rapsolja", "amount": 1, "unit": "msk" }
+    ]
+  }
+]
