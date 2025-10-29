@@ -6,7 +6,6 @@ import App from "./App.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import RecipePage from "./pages/RecipePage.tsx";
 import NewRecipePage from "./pages/NewRecipePage.tsx";
-import ApiPlayground from "./pages/ApiPlayground.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,7 +15,6 @@ createRoot(document.getElementById("root")!).render(
           <Route index element={<HomePage />} />
           <Route path="recept/:id" element={<RecipePage />} />
           <Route path="nytt" element={<NewRecipePage />} />
-          <Route path="test" element={<ApiPlayground />} />
         </Route>
       </Routes>
     </BrowserRouter>

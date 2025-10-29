@@ -11,7 +11,6 @@ export default function App() {
         <nav style={{ marginLeft: "auto", display: "flex", gap: 12 }}>
           <Link to="/">Alla recept</Link>
           <Link to="/nytt">+ Nytt</Link>
-          {/* <Link to="/test">API-test</Link> */}
         </nav>
       </header>
       <main style={{ marginTop: 24 }}>
