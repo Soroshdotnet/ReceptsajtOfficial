@@ -1,3 +1,18 @@
+# Powershell and terminal commands
+
+1) Installera npm:
+npm install 
+
+2) Installera router
+Kör i projektroten:
+npm i react-router-dom
+
+3) Installera beroenden:
+npm ci || npm install 
+
+4) Starta dev-servern (Vite):
+npm run dev
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
