@@ -1,5 +1,5 @@
 import type {ReactElement} from "react";
-import type {IRecipe} from "./interfaces";
+import type {IRecipe} from "@/types";
 
 export function RecipeCard(Recipe: IRecipe): ReactElement {
     return (
