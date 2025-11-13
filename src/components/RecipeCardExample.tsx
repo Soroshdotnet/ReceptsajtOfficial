@@ -27,6 +27,10 @@ export function RecipeCardExample({ recipe }: RecipeCardExampleProps) {
             />
             <RecipeCard.Categories categories={recipe.categories} />
           </RecipeCard.Header>
+          <RecipeCard.Body>
+            <RecipeCard.Description children={recipe.description}/>
+            <RecipeCard.Ingredients ingredients={recipe.ingredients} />
+          </RecipeCard.Body>
         </div>
       </div>
     </RecipeCard>
