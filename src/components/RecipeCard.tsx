@@ -1,5 +1,7 @@
-import type { ReactNode } from "react";
-import type { Recipe } from "@/types";
+import type {ReactNode} from "react";
+import type {Recipe} from "@/types";
+import {useNavigate} from 'react-router-dom';
+
 
 interface RecipeCardProps {
     children: ReactNode;
@@ -23,15 +25,16 @@ type RecipeCardIngredientsProps = Pick<Recipe, 'ingredients'>;
 
 type RecipeCardInstructionsProps = Pick<Recipe, 'instructions'>;
 
-export function RecipeCard({ children }: RecipeCardProps) {
+export function RecipeCard({children}: RecipeCardProps) {
     return (
-        <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 m-2 border border-gray-100">
+        <article
+            className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 m-2 border border-gray-100">
             {children}
         </article>
     );
 }
 
-RecipeCard.Image = function RecipeCardImage({ imageUrl, alt }: RecipeCardImageProps) {
+RecipeCard.Image = function RecipeCardImage({imageUrl, alt}: RecipeCardImageProps) {
     return (
         <div className="relative overflow-hidden">
             <img
@@ -43,17 +46,17 @@ RecipeCard.Image = function RecipeCardImage({ imageUrl, alt }: RecipeCardImagePr
     );
 };
 
-RecipeCard.Header = function RecipeCardHeader({ children }: { children: ReactNode }) {
+RecipeCard.Header = function RecipeCardHeader({children}: { children: ReactNode }) {
     return <div className="p-6 space-y-3">{children}</div>;
 };
 
-RecipeCard.Title = function RecipeCardTitle({ children }: RecipeCardTitleProps) {
+RecipeCard.Title = function RecipeCardTitle({children}: RecipeCardTitleProps) {
     return <h2 className="text-2xl font-bold text-gray-900">{children}</h2>;
 };
 
-RecipeCard.Meta = function RecipeCardMeta({ timeInMins, price, rating }: RecipeCardMetaProps) {
+RecipeCard.Meta = function RecipeCardMeta({timeInMins, price, rating}: RecipeCardMetaProps) {
     const avgRating = rating ? rating.toFixed(1) : 'N/A';
-    
+
     return (
         <div className="flex items-center gap-4 text-sm text-gray-600">
             <div className="flex items-center gap-1">
@@ -72,30 +75,36 @@ RecipeCard.Meta = function RecipeCardMeta({ timeInMins, price, rating }: RecipeC
     );
 };
 
-RecipeCard.Categories = function RecipeCardCategories({ categories }: RecipeCardCategoriesProps) {
+RecipeCard.Categories = function RecipeCardCategories({categories}: RecipeCardCategoriesProps) {
+    const navigate = useNavigate();
+    const handleCategoryClick = (category: string) => {
+        navigate(`/category/${category}`);
+    };
+
     return (
         <div className="flex flex-wrap gap-2">
             {categories && categories.map((category) => (
-                <span
+                <button
                     key={category}
-                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
+                    onClick={() => handleCategoryClick(category)}
+                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium cursor-pointer"
                 >
                     {category}
-                </span>
+                </button>
             ))}
         </div>
     );
 };
 
-RecipeCard.Description = function RecipeCardDescription({ children }: RecipeCardDescriptionProps) {
+RecipeCard.Description = function RecipeCardDescription({children}: RecipeCardDescriptionProps) {
     return <p className="text-gray-600 leading-relaxed">{children}</p>;
 };
 
-RecipeCard.Body = function RecipeCardBody({ children }: { children: ReactNode }) {
+RecipeCard.Body = function RecipeCardBody({children}: { children: ReactNode }) {
     return <div className="px-6 pb-6 space-y-4">{children}</div>;
 };
 
-RecipeCard.Ingredients = function RecipeCardIngredients({ ingredients }: RecipeCardIngredientsProps) {
+RecipeCard.Ingredients = function RecipeCardIngredients({ingredients}: RecipeCardIngredientsProps) {
     return (
         <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Ingredients</h3>
@@ -113,14 +122,15 @@ RecipeCard.Ingredients = function RecipeCardIngredients({ ingredients }: RecipeC
     );
 };
 
-RecipeCard.Instructions = function RecipeCardInstructions({ instructions }: RecipeCardInstructionsProps) {
+RecipeCard.Instructions = function RecipeCardInstructions({instructions}: RecipeCardInstructionsProps) {
     return (
         <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Instructions</h3>
             <ol className="space-y-3">
                 {instructions.map((instruction, index) => (
                     <li key={index} className="flex gap-3 text-gray-700">
-                        <span className="shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                        <span
+                            className="shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-medium">
                             {index + 1}
                         </span>
                         <span className="flex-1">{instruction}</span>
@@ -131,7 +141,7 @@ RecipeCard.Instructions = function RecipeCardInstructions({ instructions }: Reci
     );
 };
 
-RecipeCard.Footer = function RecipeCardFooter({ children }: { children: ReactNode }) {
+RecipeCard.Footer = function RecipeCardFooter({children}: { children: ReactNode }) {
     return <div className="px-6 py-4 bg-gray-50 border-t">{children}</div>;
 };
 
