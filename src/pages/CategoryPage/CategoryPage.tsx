@@ -26,6 +26,7 @@ export const CategoryPage: React.FC = () => {
 
     return (
         <main>
+            <span>Du tittar nu på: {category}</span>
             {renderListOfRecipes(recipes)}
         </main>
     );
