@@ -4,7 +4,7 @@ import type { Recipe } from "@/types";
 
 interface RecipeCardContextValue {
   recipe: Recipe;
-  variant?: "default" | "compact" | "minimal";
+  variant?: "default" | "compact";
 }
 
 const RecipeCardContext = createContext<RecipeCardContextValue | null>(null);
