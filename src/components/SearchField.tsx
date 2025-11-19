@@ -23,7 +23,7 @@ export const SearchField = ({ setSearchQuery }: SearchFieldProps) => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search recipes..."
       />
-      <Button type="submit" size="icon">
+      <Button type="submit" size="icon" aria-label="Search recipes">
         <Search className="w-4 h-4" />
       </Button>
     </form>
