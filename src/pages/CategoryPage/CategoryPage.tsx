@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import type {Recipe} from "@/types";
 import {getRecipesByCategory} from "@/api";
-import {RecipeCardExample} from "@/components/RecipeCardExample.tsx";
 import {useParams} from "react-router-dom";
+import {RecipeCardCompact} from "@/components/recipe-card";
+import { ChefHat } from "lucide-react";
 
 export const CategoryPage: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -19,15 +20,20 @@ export const CategoryPage: React.FC = () => {
     function renderListOfRecipes(recipes: Recipe[]) {
         return (
             recipes.map((recipe: Recipe) => (
-                <RecipeCardExample key={recipe.title} recipe={recipe}/>
+                <RecipeCardCompact key={recipe.title} recipe={recipe}/>
             ))
         )
     }
 
     return (
-        <main>
-            <span>Du tittar nu på: {category}</span>
+        <>
+            <div className="flex items-center gap-2 mb-8 justify-center">
+                <ChefHat className="w-8 h-8 text-primary" />
+                <h1 className="text-4xl text-primary font-bold">{category}</h1>
+            </div>
+            <div className="space-y-4 mx-auto">
             {renderListOfRecipes(recipes)}
-        </main>
+            </div>
+        </>
     );
 };

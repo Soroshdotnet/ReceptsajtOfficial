@@ -1,8 +1,9 @@
 import {getAllRecipes} from "@/api/recipes";
-import {RecipeCardExample} from "@/components/RecipeCardExample";
 import type {Recipe} from "@/types";
 import React, {useEffect, useState} from "react";
 import {SearchField} from "@/components/SearchField.tsx";
+import { ChefHat } from "lucide-react";
+import { RecipeCardCompact } from "@/components/recipe-card";
 
 export const LandingPage: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -22,19 +23,25 @@ export const LandingPage: React.FC = () => {
     });
 
     function renderListOfRecipes(recipes: Recipe[]) {
-        console.log(recipes)
         return (
             recipes.map((recipe: Recipe) => (
-                <RecipeCardExample key={recipe.title} recipe={recipe}/>
+                <RecipeCardCompact key={recipe.title} recipe={recipe}/>
             ))
         )
     }
 
     return (
-        <main>
-            <h1 className="text-2xl font-bold underline">Start</h1>
-            <SearchField setSearchQuery={setSearchQuery}/>
-            {filteredRecipes.length > 0 ? (renderListOfRecipes(filteredRecipes)) : <p>No recipes found</p>}
-        </main>
+        <>
+            <div className="flex items-center gap-2 mb-8 justify-center">
+                <ChefHat className="w-8 h-8 text-primary" />
+                <h1 className="text-4xl text-primary font-bold">Julbordsguiden</h1>
+            </div>
+            <div className="mb-8 flex justify-center">
+                <SearchField setSearchQuery={setSearchQuery}/>
+            </div>
+            <div className="space-y-4 mx-auto">
+                {filteredRecipes.length > 0 ? (renderListOfRecipes(filteredRecipes)) : <p className="text-muted-foreground text-lg">No recipes found</p>}
+            </div>
+        </>
     );
 };
