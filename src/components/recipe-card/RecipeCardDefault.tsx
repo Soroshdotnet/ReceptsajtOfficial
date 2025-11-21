@@ -20,7 +20,7 @@ interface RecipeCardDefaultProps {
 export function RecipeCardDefault({ recipe }: RecipeCardDefaultProps) {
   return (
     <RecipeCardProvider recipe={recipe} variant="default">
-      <RecipeCardRoot>
+      <RecipeCardRoot className="md:w-[600px] sm:w-sm">
         <RecipeCardImage />
         <RecipeCardHeader>
           <RecipeCardTitle />
