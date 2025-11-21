@@ -3,36 +3,36 @@ import App from "../App.tsx";
 import {LandingPage} from "../pages/LandingPage/LandingPage.tsx";
 import {CategoryPage} from "@/pages/CategoryPage/CategoryPage.tsx";
 import {RecipePage} from "@/pages/RecipePage/RecipePage.tsx";
+import {Header} from "@/components/Header.tsx";
+import {Footer} from "@/components/Footer.tsx";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
+        element: (
+            <>
+                <Header/>
+                <App/>
+                <Footer/>
+            </>
+        ),
         children: [
             {
                 index: true,
                 element: <LandingPage/>
-            }
-        ],
-    },
-    {
-        path: "category/:category",
-        element: <App/>,
-        children: [
+
+            },
             {
+                path: "category/:category",
                 index: true,
                 element: <CategoryPage/>
-            }
-        ],
-    },
-    {
-        path: "recipe/:recipeId",
-        element: <App/>,
-        children: [
+            },
             {
+                path: "recipe/:recipeId",
                 index: true,
                 element: <RecipePage/>
             }
         ],
-    }
+    },
+
 ]);
