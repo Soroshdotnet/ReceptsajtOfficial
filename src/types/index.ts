@@ -2,7 +2,7 @@ export interface Recipe {
   _id?: string;
   title: string;
   description: string;
-  ratings: number[];
+  ratings: Rating;
   imageUrl: string;
   timeInMins: number;
   price: number;
