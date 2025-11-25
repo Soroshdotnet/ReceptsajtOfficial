@@ -27,3 +27,8 @@ export interface Comment {
 export interface Rating {
   value: number;
 }
+
+export interface Category {
+  name: string;
+  count: number;
+}

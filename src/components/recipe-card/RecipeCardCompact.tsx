@@ -20,10 +20,10 @@ interface RecipeCardCompactProps {
 export function RecipeCardCompact({ recipe }: RecipeCardCompactProps) {
   return (
     <RecipeCardProvider recipe={recipe} variant="compact">
-      <RecipeCardRoot className="flex flex-row h-full p-0 max-w-[600px] gap-0">
-        <RecipeCardImage className="h-[200px]"/>
+      <RecipeCardRoot className="flex flex-row p-0 w-full max-w-[600px] gap-0">
+        <RecipeCardImage className="min-h-[200px] max-h-[220px]"/>
         
-        <div className="p-2 flex flex-col flex-4">
+        <div className="p-2 pb-0 flex flex-col flex-4">
           <CardContent className="flex-1 p-0 py-2 px-6">
             <RecipeCardTitle className="mb-2" />
             <RecipeCardMeta />
@@ -35,7 +35,7 @@ export function RecipeCardCompact({ recipe }: RecipeCardCompactProps) {
                 className="text-primary font-medium mt-4 justify-start hover:underline cursor-pointer"
                 asChild
               >
-                <Link to={`/recipe/${recipe._id}`}>
+                <Link to={`/${recipe.categories[0]}/${recipe._id}`}>
                     Gå till recept
                     <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
