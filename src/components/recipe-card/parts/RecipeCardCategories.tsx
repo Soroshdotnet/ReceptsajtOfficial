@@ -25,7 +25,7 @@ export function RecipeCardCategories({ className, limit }: RecipeCardCategoriesP
     <div className={cn(defaultClasses, className)}>
       {categories?.map((category) => (
         <Badge key={category} variant="secondary" className={badgeClasses} asChild>
-            <Link to={`/category/${encodeURIComponent(category)}`}>
+            <Link to={`/${encodeURIComponent(category)}`}>
                 {category}
             </Link>
          </Badge>

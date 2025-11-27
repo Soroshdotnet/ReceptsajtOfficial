@@ -1,13 +1,24 @@
 import {Outlet} from "react-router-dom";
+import {SidebarInset, SidebarProvider} from "./components/ui/sidebar";
+
+import {AppSidebarComposed} from "./components/sidebar";
+import { SiteHeader } from "./components/sidebar/parts/SidebarHeader";
 
 function App() {
-
     return (
-        <main className="min-h-screen bg-linear-to-b from-background to-background/50 p-8 mx-auto">
-            <div className="max-w-xl mx-auto">
-                <Outlet/>
-            </div>
-        </main>
+        <div className="[--header-height:calc(--spacing(14))]">
+            <SidebarProvider className="flex flex-col">
+                <SiteHeader />
+                <div className="flex flex-1">
+                    <AppSidebarComposed />
+                    <SidebarInset>
+                        <div className="flex flex-1 flex-col gap-4 p-4">
+                            <Outlet/>
+                        </div>
+                    </SidebarInset>
+                </div>
+            </SidebarProvider>
+        </div>
     )
 }
 
