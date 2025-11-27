@@ -56,7 +56,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
             }}
             className="space-y-4"
         >
-            <div>
+            <div className="flex flex-col gap-3">
                 <Label htmlFor="title">Title</Label>
                 <Input
                     id="title"
@@ -69,9 +69,8 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter title"
                 />
-            </div>
 
-            <div>
+
                 <Label htmlFor="description">Description</Label>
                 <textarea
                     id="description"
@@ -84,9 +83,8 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter description"
                 />
-            </div>
 
-            <div>
+
                 <Label htmlFor="ratings">Rating</Label>
                 <Input
                     id="ratings"
@@ -100,9 +98,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter rating"
                 />
-            </div>
 
-            <div>
                 <Label htmlFor="imageUrl">Image URL</Label>
                 <Input
                     id="imageUrl"
@@ -115,9 +111,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter image URL"
                 />
-            </div>
 
-            <div>
                 <Label htmlFor="price">Price</Label>
                 <Input
                     id="price"
@@ -131,8 +125,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter price"
                 />
-            </div>
-            <div>
+
                 <Label htmlFor="timeInMins">timeInMins</Label>
                 <Input
                     id="timeInMins"
@@ -146,9 +139,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter timeInMins"
                 />
-            </div>
 
-            <div>
                 <Label htmlFor="categories">Categories</Label>
                 <Input
                     id="categories"
@@ -161,9 +152,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter categories (separate each with a comma)"
                 />
-            </div>
 
-            <div>
                 <Label htmlFor="instructions">Instructions</Label>
                 <textarea
                     id="instructions"
@@ -176,37 +165,39 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                     }
                     placeholder="Enter instructions (one per new line)"
                 />
-            </div>
-            <Label htmlFor="ingredients">Ingredients</Label>
-            {formData.ingredients.map((ingredient, index) => (
-                <div key={index}>
-                    <input
-                        type="text"
-                        value={ingredient.name}
-                        onChange={(e) => handleChange(index, "name", e.target.value)}
-                        placeholder="Name"
-                    />
-                    <input
-                        type="number"
-                        value={ingredient.amount}
-                        onChange={(e) => handleChange(index, "amount", e.target.valueAsNumber)}
-                        placeholder="Amount"
-                    />
-                    <input
-                        type="text"
-                        value={ingredient.unit}
-                        onChange={(e) => handleChange(index, "unit", e.target.value)}
-                        placeholder="Unit"
-                    />
-                    <button type="button" onClick={() => removeIngredient(index)}>
-                        Remove
+                <div className="flex flex-wrap gap-2">
+                    <Label htmlFor="ingredients">Ingredients</Label>
+                    {formData.ingredients.map((ingredient, index) => (
+                        <div key={index}>
+                            <input
+                                type="text"
+                                value={ingredient.name}
+                                onChange={(e) => handleChange(index, "name", e.target.value)}
+                                placeholder="Name"
+                            />
+                            <input
+                                type="number"
+                                value={ingredient.amount}
+                                onChange={(e) => handleChange(index, "amount", e.target.valueAsNumber)}
+                                placeholder="Amount"
+                            />
+                            <input
+                                type="text"
+                                value={ingredient.unit}
+                                onChange={(e) => handleChange(index, "unit", e.target.value)}
+                                placeholder="Unit"
+                            />
+                            <button type="button" onClick={() => removeIngredient(index)}>
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+                    <button type="button" onClick={addIngredient}>
+                        Add Ingredient
                     </button>
+                    <Button type="submit">Submit</Button>
                 </div>
-            ))}
-            <button type="button" onClick={addIngredient}>
-                Add Ingredient
-            </button>
-            <Button type="submit">Submit</Button>
+            </div>
         </form>
     );
 };
