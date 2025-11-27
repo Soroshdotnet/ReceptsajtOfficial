@@ -10,7 +10,7 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
     const [formData, setFormData] = React.useState<Recipe>({
         title: "",
         description: "",
-        ratings: {value: 0},
+        ratings: 0,
         imageUrl: "",
         timeInMins: 0,
         price: 0,
@@ -89,11 +89,11 @@ const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
                 <Input
                     id="ratings"
                     type="number"
-                    value={formData.ratings.value}
+                    value={formData.ratings}
                     onChange={(e) =>
                         setFormData((prev) => ({
                             ...prev,
-                            ratings: {value: e.target.valueAsNumber}
+                            ratings: e.target.valueAsNumber
                         }))
                     }
                     placeholder="Enter rating"

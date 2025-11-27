@@ -19,7 +19,7 @@ export const CreateRecipeModal = ({onSubmit}: CreateRecipeModalProps) => {
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger asChild className="hover:text-blue-600 transition-colors">
                 <Button>
                     <Plus/>
                     Create Recipe
