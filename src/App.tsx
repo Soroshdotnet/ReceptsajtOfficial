@@ -1,7 +1,8 @@
 import {Outlet} from "react-router-dom";
 import {SidebarInset, SidebarProvider} from "./components/ui/sidebar";
-import {SiteHeader} from "./components/site-header";
+
 import {AppSidebarComposed} from "./components/sidebar";
+import { SiteHeader } from "./components/sidebar/parts/SidebarHeader";
 
 function App() {
     return (
