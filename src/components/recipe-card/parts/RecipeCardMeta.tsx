@@ -26,9 +26,10 @@ function MetaItem({ icon: Icon, value, iconClassName = "text-accent", fill = fal
 export function RecipeCardMeta({ className }: RecipeCardMetaProps) {
   const { recipe, variant } = useRecipeCard();
   
-  const avgRating = recipe.ratings?.length > 0
-    ? (recipe.ratings.reduce((a, b) => a + b, 0) / recipe.ratings.length).toFixed(1)
-    : "N/A";
+   const avgRating =
+    typeof recipe.ratings === "number" && recipe.ratings > 0
+      ? recipe.ratings.toFixed(1)   // ger t.ex. "4.0"
+      : "N/A";
 
   const defaultClasses = variant === "compact"
     ? "flex gap-2 text-xs text-muted-foreground mb-3"
