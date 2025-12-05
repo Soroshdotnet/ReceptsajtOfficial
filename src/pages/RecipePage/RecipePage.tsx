@@ -80,16 +80,23 @@ export const RecipePage: React.FC = () => {
     try {
       setError(null);
 
-      const saved = await addComment(recipeId, {
-        name: name ?? "Anonym",
-        comment,
-      });
-      await addRating(recipeId, { rating: currentRating });  
+      const saved: Comment = {
+        name: name || "Anonym",
+        comment: comment,
+      }
+
+      console.log("Skickar kommentar:", saved);
+      await addComment(recipeId, saved);
+      if(currentRating > 0){
+          addRating(recipeId, { rating: currentRating })
+      }
+      setCurrentRating(0);
       setComments((prev) => [...(prev || []), saved]);
       setName("");
       setComment("");
-    } catch {
-      setError("Kunde inte spara kommentaren.");
+    } catch(e) {
+      console.error("Fel vid sparande av kommentar:", e);
+      setError("Kunde inte spara kommentaren. " + (e instanceof Error ? e.message : String(e)));
     }
   }
 
