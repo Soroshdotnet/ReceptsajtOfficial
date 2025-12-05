@@ -1,21 +1,25 @@
-import { Outlet, Link } from "react-router-dom";
-import "./App.css";
+import {Outlet} from "react-router-dom";
+import {SidebarInset, SidebarProvider} from "./components/ui/sidebar";
 
-export default function App() {
-  return (
-    <div style={{ maxWidth: 980, margin: "0 auto", padding: 16 }}>
-      <header style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        <Link to="/" style={{ fontWeight: 700, fontSize: 20, textDecoration: "none" }}>
-          Receptsajt
-        </Link>
-        <nav style={{ marginLeft: "auto", display: "flex", gap: 12 }}>
-          <Link to="/">Alla recept</Link>
-          <Link to="/nytt">+ Nytt</Link>
-        </nav>
-      </header>
-      <main style={{ marginTop: 24 }}>
-        <Outlet />
-      </main>
-    </div>
-  );
+import {AppSidebarComposed} from "./components/sidebar";
+import { SiteHeader } from "./components/sidebar/parts/SidebarHeader";
+
+function App() {
+    return (
+        <div className="[--header-height:calc(--spacing(14))]">
+            <SidebarProvider className="flex flex-col">
+                <SiteHeader />
+                <div className="flex flex-1">
+                    <AppSidebarComposed />
+                    <SidebarInset>
+                        <div className="flex flex-1 flex-col gap-4 p-4">
+                            <Outlet/>
+                        </div>
+                    </SidebarInset>
+                </div>
+            </SidebarProvider>
+        </div>
+    )
 }
+
+export default App
