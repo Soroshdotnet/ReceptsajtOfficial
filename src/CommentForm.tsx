@@ -21,6 +21,8 @@ export default function CommentForm({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     onSubmit();
+    onNameChange('');
+    onCommentChange('');
   }
 
   return (

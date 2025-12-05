@@ -29,6 +29,6 @@ export const getComments = async (recipeId: string): Promise<Comment[]> => {
   return get<Comment[]>(`/recipes/${recipeId}/comments`);
 };
 
-export const addComment = async (recipeId: string, comment: Omit<Comment, '_id' | 'createdAt'>): Promise<Comment> => {
+export const addComment = async (recipeId: string, comment: Comment): Promise<Comment> => {
   return post<Comment>(`/recipes/${recipeId}/comments`, comment);
 };
