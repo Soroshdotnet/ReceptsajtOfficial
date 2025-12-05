@@ -24,8 +24,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { get } from "@/api/client";
-import { set } from "react-hook-form";
 
 export const RecipePage: React.FC = () => {
   const { recipeId } = useParams<{ recipeId: string }>();
@@ -33,7 +31,7 @@ export const RecipePage: React.FC = () => {
 
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [comments, setComments] = useState<Comment[]>();
-  const [rating, setRating] = useState<number>(0);
+  const [_, setRating] = useState<number>(0);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -92,17 +90,6 @@ export const RecipePage: React.FC = () => {
       setComment("");
     } catch {
       setError("Kunde inte spara kommentaren.");
-    }
-  }
-
-  async function rate(stars: number) {
-    if (!recipeId) return;
-    setCurrentRating(stars);
-    try {
-      setError(null);
-        
-    } catch {
-      setError("Kunde inte spara betyget.");
     }
   }
 

@@ -25,7 +25,7 @@ export default function RecipeForm({
     defaultValues: {
       title: "",
       description: "",
-      ratings: [],
+      avgRating: 0,
       imageUrl: "",
       timeInMins: 0,
       price: 0,
