@@ -34,7 +34,7 @@ export function RecipeCardMeta({ className }: RecipeCardMetaProps) {
     <div className={cn(defaultClasses, className)}>
       <MetaItem icon={Clock} value={`${recipe.timeInMins} min`} />
       <MetaItem icon={DollarSign} value={`$${recipe.price}`} iconClassName="text-primary" />
-      <MetaItem icon={Star} value={recipe.avgRating.toFixed(1)} fill />
+      <MetaItem icon={Star} value={recipe.avgRating ? recipe.avgRating.toFixed(1) : "N/A"} fill />
     </div>
   );
 }
