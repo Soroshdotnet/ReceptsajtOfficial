@@ -2,13 +2,17 @@ export interface Recipe {
   _id?: string;
   title: string;
   description: string;
-  ratings: number[];
+  avgRating: number;
   imageUrl: string;
   timeInMins: number;
   price: number;
   categories: string[];
   instructions: string[];
-  ingredients: Ingredient[];
+  ingredients: {
+    name: string;
+    amount: number;
+    unit: string;
+  }[];
 }
 
 export interface Ingredient {
@@ -18,14 +22,12 @@ export interface Ingredient {
 }
 
 export interface Comment {
-  _id?: string;
-  author: string;
-  text: string;
-  createdAt?: string;
+  comment: string;
+  name: string;
 }
 
 export interface Rating {
-  value: number;
+  rating: number;
 }
 
 export interface Category {

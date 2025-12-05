@@ -1,6 +1,8 @@
-import React from "react";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
-// 1. Definiera vilka props komponenten tar emot
 type CommentFormProps = {
   name: string;
   comment: string;
@@ -9,7 +11,6 @@ type CommentFormProps = {
   onSubmit: () => void;
 };
 
-// 2. ”Presentational component” som bara använder props
 export default function CommentForm({
   name,
   comment,
@@ -19,36 +20,33 @@ export default function CommentForm({
 }: CommentFormProps) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSubmit(); // låt parent (RecipePage) sköta logiken
+    onSubmit();
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ display: "grid", gap: 8, maxWidth: 520, marginTop: 12 }}
-    >
-      <input
-        placeholder="Ditt namn"
-        value={name}
-        onChange={(e) => onNameChange(e.target.value)}
-      />
+    <form onSubmit={handleSubmit} className="grid gap-4 max-w-md mt-4">
+      <Field>
+        <FieldLabel htmlFor="comment-name">Ditt namn</FieldLabel>
+        <Input
+          id="comment-name"
+          value={name}
+          onChange={(e) => onNameChange(e.target.value)}
+        />
+        <FieldError />
+      </Field>
 
-      <textarea
-        placeholder="Din kommentar"
-        value={comment}
-        onChange={(e) => onCommentChange(e.target.value)}
-        rows={4}
-      />
+      <Field>
+        <FieldLabel htmlFor="comment-text">Din kommentar</FieldLabel>
+        <Textarea
+          id="comment-text"
+          rows={4}
+          value={comment}
+          onChange={(e) => onCommentChange(e.target.value)}
+        />
+        <FieldError />
+      </Field>
 
-      <button
-        style={{
-          padding: "8px 12px",
-          border: "1px solid #ddd",
-          borderRadius: 8,
-        }}
-      >
-        Skicka kommentar
-      </button>
+      <Button type="submit">Skicka kommentar</Button>
     </form>
   );
 }

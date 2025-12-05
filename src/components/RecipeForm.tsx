@@ -1,205 +1,269 @@
-import {Input} from "@/components/ui/input.tsx";
-import type {Ingredient, Recipe} from "@/types";
-import React from "react";
-import {Button} from "@/components/ui/button.tsx";
-import {Label} from "@radix-ui/react-label";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 
-const RecipeForm = ({onSubmit}: { onSubmit: (data: Recipe) => void }) => {
+import {
+  Field,
+  FieldLabel,
+  FieldError,
+  FieldGroup,
+  FieldSet,
+  FieldLegend,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
+import type { Recipe } from "@/types";
 
-    const [formData, setFormData] = React.useState<Recipe>({
-        title: "",
-        description: "",
-        ratings: [],
-        imageUrl: "",
-        timeInMins: 0,
-        price: 0,
-        categories: [],
-        instructions: [],
-        ingredients: []
-    });
+type RecipeFormValues = Recipe;
 
-    const addIngredient = () => {
-        setFormData((prev) => ({
-            ...prev,
-            ingredients: [...prev.ingredients, {name: "", amount: 0, unit: ""}]
-        }));
-    };
+export default function RecipeForm({
+  onSubmit,
+}: {
+  onSubmit: (data: RecipeFormValues) => void;
+}) {
+  const form = useForm<RecipeFormValues>({
+    defaultValues: {
+      title: "",
+      description: "",
+      ratings: [],
+      imageUrl: "",
+      timeInMins: 0,
+      price: 0,
+      categories: [],
+      instructions: [],
+      ingredients: [],
+    },
+  });
 
-    const removeIngredient = (index: number) => {
-        setFormData((prev) => ({
-            ...prev,
-            ingredients: prev.ingredients.filter((_, i) => i !== index)
-        }));
-    };
-    //Makes a shallow copy
-    const handleChange = (
-        index: number,
-        field: keyof Ingredient,
-        value: string | number
-    ) => {
-        setFormData((prev) => {
-            const newIngredients = [...prev.ingredients];
-            newIngredients[index] = {
-                ...newIngredients[index],
-                [field]: value
-            };
-            return {...prev, ingredients: newIngredients};
-        });
-    };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
-    return (
-        <form
-            onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit(formData);
-            }}
-            className="space-y-4"
-        >
-            <div className="flex flex-col gap-3">
-                <Label htmlFor="title">Title</Label>
-                <Input
-                    id="title"
-                    value={formData.title}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            title: e.target.value
-                        }))
-                    }
-                    placeholder="Enter title"
+  const categories = useFieldArray<RecipeFormValues, any, "categories">({
+    control,
+    name: "categories",
+  });
+
+  const instructions = useFieldArray<RecipeFormValues, any, "instructions">({
+    control,
+    name: "instructions",
+  });
+
+  const ingredients = useFieldArray<RecipeFormValues, any, "ingredients">({
+    control,
+    name: "ingredients",
+  });
+
+  const submit = (data: RecipeFormValues) => {
+    onSubmit(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(submit)} className="space-y-6">
+      <Field>
+        <FieldLabel htmlFor="title">Titel</FieldLabel>
+        <Controller
+          control={control}
+          name="title"
+          rules={{ required: "Titel är obligatoriskt" }}
+          render={({ field }) => <Input id="title" {...field} />}
+        />
+        <FieldError>{errors.title?.message}</FieldError>
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="description">Beskrivning</FieldLabel>
+        <Controller
+          control={control}
+          name="description"
+          render={({ field }) => (
+            <Textarea id="description" rows={4} {...field} />
+          )}
+        />
+        <FieldError>{errors.description?.message}</FieldError>
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="imageUrl">Bild-URL</FieldLabel>
+        <Controller
+          control={control}
+          name="imageUrl"
+          render={({ field }) => <Input id="imageUrl" {...field} />}
+        />
+        <FieldError>{errors.imageUrl?.message}</FieldError>
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="price">Pris</FieldLabel>
+        <Controller
+          control={control}
+          name="price"
+          render={({ field }) => (
+            <Input
+              id="price"
+              type="number"
+              {...field}
+              onChange={(e) => field.onChange(e.target.valueAsNumber)}
+            />
+          )}
+        />
+        <FieldError>{errors.price?.message}</FieldError>
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="timeInMins">Tid i minuter</FieldLabel>
+        <Controller
+          control={control}
+          name="timeInMins"
+          render={({ field }) => (
+            <Input
+              id="timeInMins"
+              type="number"
+              {...field}
+              onChange={(e) => field.onChange(e.target.valueAsNumber)}
+            />
+          )}
+        />
+        <FieldError>{errors.timeInMins?.message}</FieldError>
+      </Field>
+
+      <FieldSet>
+        <FieldLegend>Kategorier</FieldLegend>
+        <FieldGroup className="space-y-2">
+          {categories.fields.map((cat, idx) => (
+            <Field key={`${cat}${idx}`}>
+              <FieldLabel>Kategori {idx + 1}</FieldLabel>
+              <Controller
+                control={control}
+                name={`categories.${idx}`}
+                render={({ field }) => <Input {...field} />}
+              />
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => categories.remove(idx)}
+              >
+                Ta bort
+              </Button>
+            </Field>
+          ))}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => categories.append("")}
+          >
+            Lägg till kategori
+          </Button>
+        </FieldGroup>
+      </FieldSet>
+
+      <FieldSet>
+        <FieldLegend>Instruktioner</FieldLegend>
+        <FieldGroup className="space-y-2">
+          {instructions.fields.map((step, idx) => (
+            <Field key={`${step}${idx}`}>
+              <FieldLabel>Steg {idx + 1}</FieldLabel>
+              <Controller
+                control={control}
+                name={`instructions.${idx}`}
+                render={({ field }) => <Textarea rows={3} {...field} />}
+              />
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => instructions.remove(idx)}
+              >
+                Ta bort
+              </Button>
+            </Field>
+          ))}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => instructions.append("")}
+          >
+            Lägg till steg
+          </Button>
+        </FieldGroup>
+      </FieldSet>
+
+      <FieldSet>
+        <FieldLegend>Ingredienser</FieldLegend>
+        <FieldGroup className="space-y-4">
+          {ingredients.fields.map((ing, idx) => (
+            <div
+              key={`${ing}${idx}`}
+              className="grid grid-cols-4 gap-2 items-end"
+            >
+              <Field>
+                <FieldLabel>Namn</FieldLabel>
+                <Controller
+                  control={control}
+                  name={`ingredients.${idx}.name`}
+                  render={({ field }) => <Input {...field} />}
                 />
+                <FieldError>
+                  {errors.ingredients?.[idx]?.name?.message}
+                </FieldError>
+              </Field>
 
-
-                <Label htmlFor="description">Description</Label>
-                <textarea
-                    id="description"
-                    value={formData.description}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            description: e.target.value
-                        }))
-                    }
-                    placeholder="Enter description"
+              <Field>
+                <FieldLabel>Mängd</FieldLabel>
+                <Controller
+                  control={control}
+                  name={`ingredients.${idx}.amount`}
+                  render={({ field }) => (
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    />
+                  )}
                 />
+                <FieldError>
+                  {errors.ingredients?.[idx]?.amount?.message}
+                </FieldError>
+              </Field>
 
-
-                <Label htmlFor="ratings">Rating</Label>
-                <Input
-                    id="ratings"
-                    type="number"
-                    value={formData.ratings[0] ?? 0}
-                    onChange={(e) =>
-                    setFormData((prev) => ({
-                        ...prev,
-                        ratings: [...prev.ratings, e.target.valueAsNumber]
-                    }))
-                }
-                    placeholder="Enter rating"
+              <Field>
+                <FieldLabel>Enhet</FieldLabel>
+                <Controller
+                  control={control}
+                  name={`ingredients.${idx}.unit`}
+                  render={({ field }) => <Input {...field} />}
                 />
+                <FieldError>
+                  {errors.ingredients?.[idx]?.unit?.message}
+                </FieldError>
+              </Field>
 
-                <Label htmlFor="imageUrl">Image URL</Label>
-                <Input
-                    id="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            imageUrl: e.target.value
-                        }))
-                    }
-                    placeholder="Enter image URL"
-                />
-
-                <Label htmlFor="price">Price</Label>
-                <Input
-                    id="price"
-                    type="number"
-                    value={formData.price}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            price: e.target.valueAsNumber
-                        }))
-                    }
-                    placeholder="Enter price"
-                />
-
-                <Label htmlFor="timeInMins">timeInMins</Label>
-                <Input
-                    id="timeInMins"
-                    type="number"
-                    value={formData.timeInMins}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            timeInMins: e.target.valueAsNumber
-                        }))
-                    }
-                    placeholder="Enter timeInMins"
-                />
-
-                <Label htmlFor="categories">Categories</Label>
-                <Input
-                    id="categories"
-                    value={formData.categories.join(",")}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            categories: e.target.value.split(",").map(cat => cat.trim())
-                        }))
-                    }
-                    placeholder="Enter categories (separate each with a comma)"
-                />
-
-                <Label htmlFor="instructions">Instructions</Label>
-                <textarea
-                    id="instructions"
-                    value={formData.instructions.join("\n")}
-                    onChange={(e) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            instructions: e.target.value.split("\n")
-                        }))
-                    }
-                    placeholder="Enter instructions (one per new line)"
-                />
-                <div className="flex flex-wrap gap-2">
-                    <Label htmlFor="ingredients">Ingredients</Label>
-                    {formData.ingredients.map((ingredient, index) => (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                value={ingredient.name}
-                                onChange={(e) => handleChange(index, "name", e.target.value)}
-                                placeholder="Name"
-                            />
-                            <input
-                                type="number"
-                                value={ingredient.amount}
-                                onChange={(e) => handleChange(index, "amount", e.target.valueAsNumber)}
-                                placeholder="Amount"
-                            />
-                            <input
-                                type="text"
-                                value={ingredient.unit}
-                                onChange={(e) => handleChange(index, "unit", e.target.value)}
-                                placeholder="Unit"
-                            />
-                            <button type="button" onClick={() => removeIngredient(index)}>
-                                Remove
-                            </button>
-                        </div>
-                    ))}
-                    <button type="button" onClick={addIngredient}>
-                        Add Ingredient
-                    </button>
-                    <Button type="submit">Submit</Button>
-                </div>
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => ingredients.remove(idx)}
+              >
+                Ta bort
+              </Button>
             </div>
-        </form>
-    );
-};
+          ))}
 
-export default RecipeForm;
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() =>
+              ingredients.append({ name: "", amount: 0, unit: "" })
+            }
+          >
+            Lägg till ingrediens
+          </Button>
+        </FieldGroup>
+      </FieldSet>
+
+      <Button type="submit" className="w-full">
+        Spara recept
+      </Button>
+    </form>
+  );
+}
